@@ -7,6 +7,23 @@ from PIL import Image
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 ##################################################################################################################
+def set_dark_theme():
+    # Define the CSS styles for the dark theme
+    css = """
+    <style>
+    body {
+        color: #FFFFFF;
+        background-color: #000000;
+    }
+    </style>
+    """
+    # Apply the CSS styles
+    st.markdown(css, unsafe_allow_html=True)
+    # Set the default background color for Altair charts
+    alt.themes.enable('dark')
+
+set_dark_theme()
+##################################################################################################################
 # Page title
 st.title("WhatsApp Group: \"Cousins - Across Borders\"")
 
@@ -64,7 +81,7 @@ bar_user = alt.Chart(df_no_of_messages_grouped).mark_bar().encode(
 )
 
 # Adjust dy for better text alignment
-text_user = bar_user.mark_text(align='left', dx=2, dy=0, color='black').encode(text=alt.Text('number_of_msgs:Q', format=',d'))
+text_user = bar_user.mark_text(align='left', dx=2, dy=0, color='white').encode(text=alt.Text('number_of_msgs:Q', format=',d'))
 
 chart_user = bar_user + text_user
 
