@@ -11,9 +11,17 @@ def set_dark_theme():
     # Define the CSS styles for the dark theme
     css = """
     <style>
-    body {
-        color: #FFFFFF;
-        background-color: #000000;
+    @media (prefers-color-scheme: light) {
+        body {
+            color: #FFFFFF;
+            background-color: #000000;
+        }
+    }
+    @media (prefers-color-scheme: dark) {
+        body {
+            color: #FFFFFF;
+            background-color: #000000;
+        }
     }
     </style>
     """
@@ -22,7 +30,6 @@ def set_dark_theme():
     # Set the default background color for Altair charts
     alt.themes.enable('dark')
 
-set_dark_theme()
 ##################################################################################################################
 # Page title
 st.title("WhatsApp Group: \"Cousins - Across Borders\"")
