@@ -1,0 +1,7 @@
+streamlit
+pandas
+seaborn
+matplotlib
+altair
+Pillow
+wordcloud
