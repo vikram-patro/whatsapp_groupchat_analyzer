@@ -7,23 +7,6 @@ from PIL import Image
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 ##################################################################################################################
-def set_dark_theme():
-    st.markdown(
-        """
-        <style>
-        :root {
-            --primary-color: #000000;
-            --background-color: #222222;
-            --text-color: #FFFFFF;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-# Set dark theme
-set_dark_theme()
-##################################################################################################################
 # Page title
 st.title("WhatsApp Group: \"Cousins - Across Borders\"")
 
@@ -32,6 +15,9 @@ The legendary family group was created by our legendary <a href="https://wa.me/1
 
 I have put together some basic visualizations. I hope you'll like these analytics and strategically reposition yourself within the group to be featured in all key metrics.
 """, unsafe_allow_html=True)
+
+st.markdown("<i>Date and time are in IST<br>Data extracted on 2023-Jun-02</i>", unsafe_allow_html=True)
+
 
 ##################################################################################################################
 df_daily_messages = pd.read_pickle('df_daily_messages.pkl')
@@ -106,6 +92,12 @@ hide_table_row_index = """
 # st.markdown(hide_table_row_index, unsafe_allow_html=True)
 # st.set_option('deprecation.showPyplotGlobalUse', False)
 # st.table(df_group_name)
+##################################################################################################################
+df_top10emojis = pd.read_pickle('df_top10emojis.pkl')
+desired_order = ['emoji', 'emoji_description', 'emoji_count']
+df_top10emojis = df_top10emojis.reindex(columns=desired_order)
+df_top10emojis['emoji_count'] = df_top10emojis['emoji_count'].astype(int)
+df_top10emojis['emoji_count'] = df_top10emojis['emoji_count'].apply(lambda x: '{:,}'.format(x))
 ##################################################################################################################
 # Top 10 days
 df_top10days = pd.read_pickle('df_top10days.pkl')
@@ -334,13 +326,13 @@ with st.container():
 st.markdown('---')
 
 with st.container():
-    st.subheader("Users Chart")
+    st.subheader("Top contrubuting Cousins")
     st.altair_chart(chart_user, use_container_width=True) 
 
 st.markdown('---')
 
 with st.container():
-    st.subheader("Most used words")
+    st.subheader("Group name change history")
     st.markdown(hide_table_row_index, unsafe_allow_html=True)
     st.set_option('deprecation.showPyplotGlobalUse', False)
     st.table(df_group_name)
@@ -348,15 +340,23 @@ with st.container():
 st.markdown('---')
 
 with st.container():
-    st.subheader("Top 10 days with most conversations")
+    st.subheader("Most used Word Cloud")
     # st.altair_chart(chart_top10, use_container_width=True) 
     st.image(wordcloud.to_image()) 
 
 st.markdown('---')
 
 with st.container():
-    st.subheader("Top 10 days with most conversations")
+    st.subheader("Top 10 days with most messages exchanged")
     st.altair_chart(chart_top10, use_container_width=True)  
+
+st.markdown('---')
+
+with st.container():
+    st.subheader("Most Commonly Used Emoji's")
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+    st.table(df_top10emojis)
 
 st.markdown('---')
 
@@ -438,3 +438,7 @@ with st.container():
         # st.set_option('deprecation.showPyplotGlobalUse', False)
         st.table(heatmap_my_bottom_3)
 ##################################################################################################################
+
+st.markdown("""
+Leave your feedback <a href="https://wa.me/919885078965" style="color:steelblue" target="_blank">**here**</a> 
+""", unsafe_allow_html=True)
