@@ -20,12 +20,6 @@ def set_dark_theme():
         """,
         unsafe_allow_html=True
     )
-    st.set_page_config(
-        page_title="My Streamlit App",
-        page_icon=":sunglasses:",
-        layout="wide",
-        initial_sidebar_state="expanded",
-    )
 
 # Set dark theme
 set_dark_theme()
