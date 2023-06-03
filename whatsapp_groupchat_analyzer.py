@@ -8,28 +8,27 @@ from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 ##################################################################################################################
 def set_dark_theme():
-    # Define the CSS styles for the dark theme
-    css = """
-    <style>
-    @media (prefers-color-scheme: light) {
-        body {
-            color: #FFFFFF;
-            background-color: #000000;
+    st.markdown(
+        """
+        <style>
+        :root {
+            --primary-color: #000000;
+            --background-color: #222222;
+            --text-color: #FFFFFF;
         }
-    }
-    @media (prefers-color-scheme: dark) {
-        body {
-            color: #FFFFFF;
-            background-color: #000000;
-        }
-    }
-    </style>
-    """
-    # Apply the CSS styles
-    st.markdown(css, unsafe_allow_html=True)
-    # Set the default background color for Altair charts
-    alt.themes.enable('dark')
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    st.set_page_config(
+        page_title="My Streamlit App",
+        page_icon=":sunglasses:",
+        layout="wide",
+        initial_sidebar_state="expanded",
+    )
 
+# Set dark theme
+set_dark_theme()
 ##################################################################################################################
 # Page title
 st.title("WhatsApp Group: \"Cousins - Across Borders\"")
